@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <!--<ItemGroup>
+    <None Remove="NgClient\dist\main.6a8c7a2cc03f517e.js" />
+    <None Remove="NgClient\dist\polyfills.4e53af2838e2b656.js" />
+    <None Remove="NgClient\dist\runtime.c4baefb359c70bd5.js" />
+    <None Remove="NgClient\dist\styles.ef46db3751d8e999.css" />
+  </ItemGroup>-->
+  <!--<ItemGroup>
+    <Content Include="NgClient\dist\runtime.c4baefb359c70bd5.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="NgClient\dist\main.6a8c7a2cc03f517e.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NgClient\dist\polyfills.4e53af2838e2b656.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NgClient\dist\styles.ef46db3751d8e999.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>-->
+  <!-- <ItemGroup>
+    <AngularCliFiles Include="NgClient\dist\**" />
+  </ItemGroup> -->
+
+  <Target Name="BuildAngularApp" BeforeTargets="Build">
+    <Message Text="Building Angular app" Importance="high" />
+    <Exec Command="npm install" WorkingDirectory="$(ProjectDir)NgClient" />
+    <Exec Command="ng build --output-path=$(ProjectDir)wwwroot\dist" WorkingDirectory="$(ProjectDir)NgClient" />
+  </Target>
+
+  <Target Name="PublishAngularApp" AfterTargets="Publish">
+    <Exec Command="npm install" WorkingDirectory="$(ProjectDir)NgClient" />
+    <Exec Command="ng build --prod --output-path=$(PublishDir)wwwroot\dist" WorkingDirectory="$(ProjectDir)NgClient" />
+  </Target>
+</Project>
