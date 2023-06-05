@@ -1,19 +1,30 @@
 <div>
-  <h2>User Form</h2>
   <form (submit)="submitForm()">
     <div>
-      <label for="firstName">First Name:</label>
-      <input type="text" id="firstName" [(ngModel)]="firstName" name="firstName" required>
+      <table width="400">
+        <tr>
+          <td colspan="2"><h2>User Form</h2></td>
+        </tr>
+        <tr>
+          <td width="100"><label for="firstName">First Name:</label></td>
+          <td><input type="text" id="firstName" [(ngModel)]="firstName" name="firstName" required></td>
+        </tr>
+        <tr>
+          <td width="100"><label for="lastName">Last Name:</label></td>
+          <td><input type="text" id="lastName" [(ngModel)]="lastName" name="lastName" required></td>
+        </tr>
+        <tr>
+          <td width="100"><label for="zipCode">Zip Code:</label></td>
+          <td><input type="text" id="zipCode" [(ngModel)]="zipCode" name="zipCode" required></td>
+        </tr>
+        <tr>
+          <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+          <td colspan="2"><button type="submit">Submit</button></td>
+        </tr>
+      </table>
     </div>
-    <div>
-      <label for="lastName">Last Name:</label>
-      <input type="text" id="lastName" [(ngModel)]="lastName" name="lastName" required>
-    </div>
-    <div>
-      <label for="zipCode">Zip Code:</label>
-      <input type="text" id="zipCode" [(ngModel)]="zipCode" name="zipCode" required>
-    </div>
-    <button type="submit">Submit</button>
   </form>
   <div *ngIf="statusMessage">
     {{ statusMessage }}

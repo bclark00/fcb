@@ -42,7 +42,7 @@ namespace FirstCitizensBank.Controllers
             Contact? contact = JsonConvert.DeserializeObject<Contact>(contactJson);
             if (string.IsNullOrEmpty(contact?.FirstName) || string.IsNullOrEmpty(contact.LastName) || string.IsNullOrEmpty(contact.ZipCode))
             {
-                return Content("Please fill in all fields.");
+                return Json("Please fill in all fields.");
             }
 
             try
@@ -55,7 +55,7 @@ namespace FirstCitizensBank.Controllers
                 return Json("Data submitted successfully.");
             }
             catch {
-                return Content("Database failure.");
+                return Json("Database failure.");
             }
         }
     }
