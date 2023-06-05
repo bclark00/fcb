@@ -1,6 +1,8 @@
 ﻿using FirstCitizensBank.Models;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Diagnostics;
+using System.Security.Principal;
 
 namespace FirstCitizensBank.Controllers
 {
@@ -30,9 +32,13 @@ namespace FirstCitizensBank.Controllers
         }
 
         [HttpPost]
-        public ActionResult SubmitData(string firstName, string lastName, string zipCode)
+        
+        public ActionResult SubmitData()
         {
-            if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(zipCode))
+            string contactJson = new StreamReader(Request.Body).ReadToEndAsync().Result;
+            
+            Contact? contact = JsonConvert.DeserializeObject<Contact>(contactJson);
+            if (string.IsNullOrEmpty(contact?.FirstName) || string.IsNullOrEmpty(contact.LastName) || string.IsNullOrEmpty(contact.ZipCode))
             {
                 return Content("Please fill in all fields.");
             }

@@ -6,15 +6,15 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DataService {
-  private baseUrl = '/api/data'; // Assuming the server route is '/api/data'
+  private baseUrl = 'home/SubmitData'; 
 
   constructor(private http: HttpClient) { }
 
   submitData(firstName: string, lastName: string, zipCode: string): Observable<string> {
     const data = {
-      firstName: firstName,
-      lastName: lastName,
-      zipCode: zipCode
+      FirstName: firstName,
+      LastName: lastName,
+      ZipCode: zipCode
     };
 
     return this.http.post<string>(this.baseUrl, data);
