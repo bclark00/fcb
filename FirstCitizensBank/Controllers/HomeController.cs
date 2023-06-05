@@ -1,6 +1,8 @@
 ﻿using FirstCitizensBank.Models;
+using FirstCitizentBank;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Raven.Client.Documents.Session;
 using System.Diagnostics;
 using System.Security.Principal;
 
@@ -43,9 +45,18 @@ namespace FirstCitizensBank.Controllers
                 return Content("Please fill in all fields.");
             }
 
-            // TODO: Store/Persist the submitted data to database
-
-            return Content("Data submitted successfully.");
+            try
+            {
+                using (IDocumentSession session = DocumentStoreHolder.Store.OpenSession())
+                {
+                    session.Store(contact);
+                    session.SaveChanges();
+                }
+                return Json("Data submitted successfully.");
+            }
+            catch {
+                return Content("Database failure.");
+            }
         }
     }
 }
